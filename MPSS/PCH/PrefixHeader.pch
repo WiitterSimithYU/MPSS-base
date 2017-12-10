@@ -1,0 +1,158 @@
+//
+//  PrefixHeader.pch
+//  MPSS
+//
+//  Created by miaomiaokeji on 2017/6/14.
+//  Copyright © 2017年 miaoYXH. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "Url.h"
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <AFNetworking.h>
+#import <MJRefresh.h>
+#import <UIImageView+WebCache.h>
+#import <Masonry.h>
+#import "BXEXtension.h"
+
+#endif
+
+
+// 自定义Log
+#ifdef DEBUG
+#define GRLog(...) NSLog(__VA_ARGS__)
+#else
+#define GRLog(...)
+#endif
+
+//主色
+#define MAINCOLOR               UIColorFromRGB(0x00a698)
+#define COLOR_GRAY_             UIColorFromRGB(0xababab) //171
+
+#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+//文字大小
+#define Font(num) [UIFont systemFontOfSize:num]
+// rgb颜色转换（16进制->10进制）
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+//带有RGBA的颜色设置
+#define COLOR(R, G, B, A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+
+/** 获取系统版本 */
+#define iOS_VERSION ([[[UIDevice currentDevice] systemVersion] floatValue])
+#define CurrentSystemVersion ([[UIDevice currentDevice] systemVersion])
+/** 设备是否为iPhone 4/4S 分辨率320x480，像素640x960，@2x */
+#define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+
+/** 设备是否为iPhone 5C/5/5S 分辨率320x568，像素640x1136，@2x */
+#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+/** 设备是否为iPhone 6 分辨率375x667，像素750x1334，@2x */
+#define iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+
+/** 设备是否为iPhone 6 Plus 分辨率414x736，像素1242x2208，@3x */
+#define iPhone6P ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
+
+/** 设备是否为iPhone 7P 像素1080*1920，@2x */
+#define iPhone7P ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1080, 1920), [[UIScreen mainScreen] currentMode].size) : NO)
+
+/** 是否为iOS6 */
+#define iOS6 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0) ? YES : NO)
+
+/** 是否为iOS7 */
+#define iOS7 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? YES : NO)
+
+/** 是否为iOS8 */
+#define iOS8 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) ? YES : NO)
+
+/** 是否为iOS9 */
+#define iOS9 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) ? YES : NO)
+
+/** 获取当前语言 */
+#define kCurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
+
+/**
+ *  the saving objects      存储对象
+ *
+ *  @param __VALUE__ V
+ *  @param __KEY__   K
+ *
+ *  @return
+ */
+#define ZLXScreenW [UIScreen mainScreen].bounds.size.width
+#define ZLXScreenH [UIScreen mainScreen].bounds.size.height
+#define iphone6P (ZLXScreenH == 736)
+#define iphone6 (ZLXScreenH == 667)
+#define iphone5 (ZLXScreenH == 568)
+#define iphone4 (ZLXScreenH == 480)
+#define UserDefaultSetObjectForKey(__VALUE__,__KEY__) \
+{\
+[[NSUserDefaults standardUserDefaults] setObject:__VALUE__ forKey:__KEY__];\
+[[NSUserDefaults standardUserDefaults] synchronize];\
+}
+
+/**
+ *  get the saved objects       获得存储的对象
+ */
+#define UserDefaultObjectForKey(__KEY__)  [[NSUserDefaults standardUserDefaults] objectForKey:__KEY__]
+
+/**
+ *  delete objects      删除对象
+ */
+#define UserDefaultRemoveObjectForKey(__KEY__) \
+{\
+[[NSUserDefaults standardUserDefaults] removeObjectForKey:__KEY__];\
+[[NSUserDefaults standardUserDefaults] synchronize];\
+}
+
+#define TableViewCellDequeue(__CELL__,__CELLCLASS__,__INDETIFIER__) \
+{\
+if (__CELL__ == nil) {\
+__CELL__ = [[__CELLCLASS__ alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:__INDETIFIER__];\
+}\
+}
+
+//本地Url
+#define LOCALADURL @"localAdUrl"
+
+#define KEYWINDOW      [UIApplication sharedApplication].delegate.window
+
+#define LocaLAreaLat          @"LocaLAreaLat"
+#define LocaLAreaLng          @"LocaLAreaLng"
+#define ZLXMargin 15
+//宽高适配
+#define kBaseLine(a) (CGFloat)a * SCREEN_WIDTH / 375.0
+//文字大小适配
+#define Textadaptation(a) (NSInteger)a * (SCREEN_WIDTH / 375.0)
+//屏幕宽高
+//#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+//#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+//导航栏高
+#define Nav_HEIGHT self.navigationController.navigationBar.frame.size.height
+//状态栏高
+#define StatusHeight [[UIApplication sharedApplication] statusBarFrame].size.height
+
+
+#define COLORA(R,G,B,A) [UIColor colorWithRed:(R)/255.0 green:(G)/255.0 blue:(B)/255.0 alpha:A]
+#define ZLX_COLOR(R,G,B) COLORA(R,G,B,1.0)
+
+#define SCREEN_POINT (float)SCREEN_WIDTH/320.f
+#define SCREEN_H_POINT (float)SCREEN_HEIGHT/568.f
+
+#define WS(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+
+/**第三方框架主头文件*/
+#import <POP.h>
+#import <MJExtension.h>
+#import <FMDB.h>
+#import <SVProgressHUD.h>
+#import <SDWebImageManager.h>
+#import <AFNetworking.h>
+#endif /* PrefixHeader_pch */
